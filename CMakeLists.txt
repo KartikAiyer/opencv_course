@@ -22,5 +22,4 @@ target_link_libraries(opencv_interface INTERFACE ${OpenCV_LIBS})
 target_compile_features(opencv_interface INTERFACE cxx_std_20)
 target_compile_definitions(opencv_interface INTERFACE -DIMAGES_FOLDER="${images_folder}")
 
-
-add_subdirectory(Week1/sample_image_operations)
+add_subdirectory(Week1)
