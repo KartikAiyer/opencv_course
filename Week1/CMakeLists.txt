@@ -7,3 +7,4 @@ target_compile_definitions(week1_interface INTERFACE -DIMAGE_PATH="${images_path
 
 add_subdirectory(sample_image_operations)
 add_subdirectory(sunglass_filter)
+add_subdirectory("QR Code Assignment")
