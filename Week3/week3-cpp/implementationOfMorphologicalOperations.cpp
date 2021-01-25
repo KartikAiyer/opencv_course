@@ -28,7 +28,7 @@ int main()
 
   int border = ksize / 2;
   Mat paddedDemoImage = Mat::zeros(Size(height + border * 2, width + border * 2), CV_8UC1);
-  copyMakeBorder(paddedDemoImage, paddedDemoImage, border, border, border, border, BORDER_CONSTANT, 0);
+
   Mat bitOR;
   for (int h_i = border; h_i < height + border; h_i++) {
     for (int w_i = border; w_i < width + border; w_i++) {

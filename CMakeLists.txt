@@ -23,3 +23,5 @@ target_compile_features(opencv_interface INTERFACE cxx_std_20)
 target_compile_definitions(opencv_interface INTERFACE -DIMAGES_FOLDER="${images_folder}")
 
 add_subdirectory(Week1)
+
+add_subdirectory(Week3)
