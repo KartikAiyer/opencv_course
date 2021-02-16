@@ -74,7 +74,7 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
                          cv::Size{50,50}};
 
   int border = ksize / 2;
-  cv::Mat padded_image = cv::Mat::zeros(cv::Size(height + border * 2, width + border * 2), CV_8UC1);
+  cv::Mat padded_image;// = cv::Mat::zeros(cv::Size(height + border * 2, width + border * 2), CV_8UC1);
   copyMakeBorder(src,
                  padded_image,
                  border, border, border, border,
@@ -90,9 +90,9 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
       cv::bitwise_and(hood, element, bitAnd);
 
       double min = 0, max = 0;
-      cv::minMaxLoc(bitAnd, &min, &max);
+      cv::minMaxLoc(bitAnd, &min, &max, 0, 0, element);
       std::cout <<"Min = " << min << " Max = " << max << std::endl;
-      if(min == 0) {
+      if((int)min == 0 && (int)max == 1) {
         dst.at<uchar>(h_i - border, w_i - border) = 0;
       }
       cv::Mat temp;
@@ -119,12 +119,12 @@ int main(int argc, char** argv)
 
 
   cv::Mat element = getStructuringElement(cv::MORPH_CROSS, cv::Size(3, 3));
-//  cv::Mat my_dilated;
-//  my_dilate(demoImage, my_dilated, element);
-//
-//  cv::Mat opencv_dilated;
-//  cv::dilate(demoImage, opencv_dilated, element);
-//  display_resized(opencv_dilated, 10, "Compare");
+  cv::Mat my_dilated;
+  my_dilate(demoImage, my_dilated, element);
+
+  cv::Mat opencv_dilated;
+  cv::dilate(demoImage, opencv_dilated, element);
+  display_resized(opencv_dilated, 10, "Compare");
 
   cv::Mat my_eroded;
   my_erode(demoImage, my_eroded, element);

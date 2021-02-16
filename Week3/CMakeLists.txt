@@ -7,3 +7,4 @@ target_compile_definitions(week3_interface INTERFACE -DDATA_PATH="${images_path}
 
 add_subdirectory(ErosionDilation)
 add_subdirectory(week3-cpp)
+add_subdirectory(CoinDetection)
