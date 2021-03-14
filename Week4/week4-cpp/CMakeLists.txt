@@ -1,0 +1,5 @@
+add_subdirectory(ColorSpaces)
+add_subdirectory(ColorTransformations)
+add_subdirectory(ImageFiltering)
+add_subdirectory(ImageGradients)
+add_subdirectory(ImageSmoothing)
