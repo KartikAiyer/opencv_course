@@ -17,38 +17,40 @@ string windowName = "Resize Image";
 string trackbarValue = "Scale";
 string trackbarType = "Type: \n 0: Scale Up \n 1: Scale Down";
 
-void scaleImage(int, void*);
+void scaleImage(int, void *);
 
-int main(){
+int main()
+{
 // load an image
-im = imread("truth.png");
+  im = imread("truth.png");
 
 // Create a window to display results
-namedWindow(windowName, WINDOW_AUTOSIZE);
+  namedWindow(windowName, WINDOW_AUTOSIZE);
 
-createTrackbar(trackbarValue, windowName, &scaleFactor, maxScaleUp, scaleImage);
-createTrackbar(trackbarType, windowName, &scaleType, maxType, scaleImage);
+  createTrackbar(trackbarValue, windowName, &scaleFactor, maxScaleUp, scaleImage);
+  createTrackbar(trackbarType, windowName, &scaleType, maxType, scaleImage);
 
-scaleImage(25,0);
+  scaleImage(25, 0);
 
-while (true){
-	int c;
-	c = waitKey(20);
-	if (static_cast<char>(c) == 27)
-		break;
-}
+  while (true) {
+    int c;
+    c = waitKey(20);
+    if (static_cast<char>(c) == 27)
+      break;
+  }
 
-return 0;
+  return 0;
 }
 
 // Callback functions
-void scaleImage(int, void*){
-	double scaleFactorDouble = 1 + scaleFactor/100.0;
-	if (scaleFactorDouble == 0){
-		scaleFactorDouble = 1;
-	}
-	Mat scaledImage;
-	resize(im, scaledImage, Size(), scaleFactorDouble, scaleFactorDouble, INTER_LINEAR);
-	imshow(windowName, scaledImage);
+void scaleImage(int, void *)
+{
+  double scaleFactorDouble = 1 + scaleFactor / 100.0;
+  if (scaleFactorDouble == 0) {
+    scaleFactorDouble = 1;
+  }
+  Mat scaledImage;
+  resize(im, scaledImage, Size(), scaleFactorDouble, scaleFactorDouble, INTER_LINEAR);
+  imshow(windowName, scaledImage);
 }
 

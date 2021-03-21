@@ -22,7 +22,7 @@ static const char USAGE[] =
                 -a=<alpha>        contrast scale from 1.0 - 3.0
                 -b=<brightness>   1 - 100)";
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 
   std::map<std::string, docopt::value> args =
@@ -31,17 +31,15 @@ int main(int argc, char** argv)
 
   std::cout << args["<filename>"] << std::endl;
 
-  fs::path input_file{ args["<filename>"].asString() };
+  fs::path input_file{args["<filename>"].asString()};
   std::for_each(args.begin(), args.end(),
-                [](const std::pair<std::string,docopt::value> &options) {
-    std::cout << options.first << ":" << options.second << std::endl;
-  });
+                [](const std::pair<std::string, docopt::value> &options) {
+                  std::cout << options.first << ":" << options.second << std::endl;
+                });
   input_file = fs::absolute(input_file);
-  if(fs::exists(input_file))
-  {
+  if (fs::exists(input_file)) {
     cv::Mat image = cv::imread(input_file);
-    if(image.empty())
-    {
+    if (image.empty()) {
       std::cout << "Could not open or find the image " << input_file << std::endl;
       std::cout << USAGE << std::endl;
       return -1;
@@ -50,11 +48,11 @@ int main(int argc, char** argv)
     float alpha = std::stof(args["-a"].asString());
     int beta = args["-b"].asLong();
 
-    for(uint32_t y = 0; y < image.rows; y++) {
-      for(uint32_t x = 0; x < image.cols; x++) {
-        for(uint32_t c = 0; c < image.channels(); c++) {
-          new_image.at<cv::Vec3b>(y,x)[c] =
-              cv::saturate_cast<uchar>(alpha * image.at<cv::Vec3b>(y,x)[c] + beta);
+    for (uint32_t y = 0; y < image.rows; y++) {
+      for (uint32_t x = 0; x < image.cols; x++) {
+        for (uint32_t c = 0; c < image.channels(); c++) {
+          new_image.at<cv::Vec3b>(y, x)[c] =
+              cv::saturate_cast<uchar>(alpha * image.at<cv::Vec3b>(y, x)[c] + beta);
         }
       }
     }

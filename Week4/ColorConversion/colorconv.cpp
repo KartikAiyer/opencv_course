@@ -27,38 +27,35 @@ cv::Mat max_mat_chan(cv::Mat image)
 cv::Mat convertBGRtoHSV(cv::Mat image)
 {
   cv::Mat normalized;
-  image.convertTo(normalized, CV_32F, 1/255.0, 0);
+  image.convertTo(normalized, CV_32F, 1 / 255.0, 0);
   cv::Mat V(image.rows, image.cols, CV_32FC1);
   cv::Mat S(image.rows, image.cols, CV_32FC1);
   cv::Mat H(image.rows, image.cols, CV_32FC1);
   cv::Mat output;
-  for(uint32_t i = 0; i < normalized.rows; i++)
-  {
-    auto* v_row = V.ptr<float>(i);
-    auto* s_row = S.ptr<float>(i);
-    auto* h_row = H.ptr<float>(i);
-    auto* in = normalized.ptr<float>(i);
+  for (uint32_t i = 0; i < normalized.rows; i++) {
+    auto *v_row = V.ptr<float>(i);
+    auto *s_row = S.ptr<float>(i);
+    auto *h_row = H.ptr<float>(i);
+    auto *in = normalized.ptr<float>(i);
 
     uint32_t k = 0;
-    for(uint32_t j = 0; j < normalized.cols; j++)
-    {
+    for (uint32_t j = 0; j < normalized.cols; j++) {
       float b = in[k++];
       float g = in[k++];
       float r = in[k++];
       float pix_min = cv::min(b, cv::min(g, r));
 
       v_row[j] = cv::max(b, cv::max(g, r));
-      s_row[j] = (cv::abs(v_row[j] - 0.0) > FLT_EPSILON) ? (v_row[j] - pix_min) / v_row[j]:0.0;
+      s_row[j] = (cv::abs(v_row[j] - 0.0) > FLT_EPSILON) ? (v_row[j] - pix_min) / v_row[j] : 0.0;
 
-      if(cv::abs(v_row[j] - r) < FLT_EPSILON) {
-        h_row[j] = 60 * (g - b)/(v_row[j] - pix_min);
-      } else if(cv::abs(v_row[j] - g) < FLT_EPSILON) {
-        h_row[j] = (120 + 60)*(b - r)/(v_row[j] - pix_min);
-      } else
-      {
-        h_row[j] = (240 + 60)*(r -g)/(v_row[j] - pix_min);
+      if (cv::abs(v_row[j] - r) < FLT_EPSILON) {
+        h_row[j] = 60 * (g - b) / (v_row[j] - pix_min);
+      } else if (cv::abs(v_row[j] - g) < FLT_EPSILON) {
+        h_row[j] = (120 + 60) * (b - r) / (v_row[j] - pix_min);
+      } else {
+        h_row[j] = (240 + 60) * (r - g) / (v_row[j] - pix_min);
       }
-      if(h_row[j] < 0) { h_row[j] += 360.0;}
+      if (h_row[j] < 0) { h_row[j] += 360.0; }
 
       v_row[j] = 255 * v_row[j];
       s_row[j] = 255 * s_row[j];

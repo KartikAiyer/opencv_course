@@ -17,7 +17,7 @@ double var_abs_laplacian(cv::Mat image)
   cv::Mat mean, stddev;
   cv::meanStdDev(cv::abs(lap), mean, stddev);
   cv::pow(stddev, 2, stddev);
-  return stddev.at<double>(0,0);
+  return stddev.at<double>(0, 0);
 }
 
 double sum_modified_laplacian(cv::Mat image)
@@ -46,7 +46,7 @@ int main()
   cap >> frame;
 
 // Display total number of frames in the video
-  std::cout << "Total number of frames : " << (int)cap.get(cv::CAP_PROP_FRAME_COUNT) << std::endl;
+  std::cout << "Total number of frames : " << (int) cap.get(cv::CAP_PROP_FRAME_COUNT) << std::endl;
 
   double maxV1 = 0;
   double maxV2 = 0;
@@ -74,7 +74,7 @@ int main()
   int rightCorner = leftCorner + (1014 - leftCorner);
 
   cv::Mat flower;
-  flower = frame(cv::Range(topCorner,bottomCorner),cv::Range(leftCorner,rightCorner));
+  flower = frame(cv::Range(topCorner, bottomCorner), cv::Range(leftCorner, rightCorner));
 
 //  cv::imshow("flower", flower);
 //  cv::setMouseCallback("flower", [](int event, int x, int y, int flags, void* client_data){
@@ -86,30 +86,30 @@ int main()
 //  cv::waitKey();
 
 // Iterate over all the frames present in the video
-  while (1){
+  while (1) {
     // Crop the flower region out of the frame
-    flower = frame(cv::Range(topCorner,bottomCorner),cv::Range(leftCorner,rightCorner));
+    flower = frame(cv::Range(topCorner, bottomCorner), cv::Range(leftCorner, rightCorner));
     // Get measures of focus from both methods
     val1 = var_abs_laplacian(flower);
     val2 = sum_modified_laplacian(flower);
     // If the current measure of focus is greater
     // than the current maximum
-    if (val1 > maxV1){
+    if (val1 > maxV1) {
       // Revise the current maximum
       maxV1 = val1;
       // Get frame ID of the new best frame
-      bestFrameId1 = (int)cap.get(cv::CAP_PROP_POS_FRAMES);
+      bestFrameId1 = (int) cap.get(cv::CAP_PROP_POS_FRAMES);
       // Revise the new best frame
       bestFrame1 = frame.clone();
       std::cout << "Frame ID of the best frame [Method 1]: " << bestFrameId1 << std::endl;
     }
     // If the current measure of focus is greater
     // than the current maximum
-    if (val2 > maxV2){
+    if (val2 > maxV2) {
       // Revise the current maximum
       maxV2 = val2;
       // Get frame ID of the new best frame
-      bestFrameId2 = (int)cap.get(cv::CAP_PROP_POS_FRAMES);
+      bestFrameId2 = (int) cap.get(cv::CAP_PROP_POS_FRAMES);
       // Revise the new best frame
       bestFrame2 = frame.clone();
       std::cout << "Frame ID of the best frame [Method 2]: " << bestFrameId2 << std::endl;

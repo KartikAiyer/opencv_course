@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-static inline void display_resized(cv::Mat& img, float scale, const std::string& window_name)
+static inline void display_resized(cv::Mat &img, float scale, const std::string &window_name)
 {
   cv::Mat temp;
   cv::resize(img, temp, cv::Size{}, scale, scale, cv::INTER_NEAREST);
@@ -14,7 +14,7 @@ static inline void display_resized(cv::Mat& img, float scale, const std::string&
   cv::waitKey();
 }
 
-void my_dilate(cv::Mat& src, cv::Mat& dst, cv::Mat element)
+void my_dilate(cv::Mat &src, cv::Mat &dst, cv::Mat element)
 {
   int ksize = element.size().height;
   int height, width;
@@ -26,7 +26,7 @@ void my_dilate(cv::Mat& src, cv::Mat& dst, cv::Mat element)
   cv::VideoWriter writer{output_file,
                          cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
                          10,
-                         cv::Size{50,50}};
+                         cv::Size{50, 50}};
 
   int border = ksize / 2;
   cv::Mat padded_image = cv::Mat::zeros(cv::Size(height + border * 2, width + border * 2), CV_8UC1);
@@ -37,17 +37,17 @@ void my_dilate(cv::Mat& src, cv::Mat& dst, cv::Mat element)
                  0);
   cv::Mat bitAnd;
   src.copyTo(dst);
-  for(uint32_t h = border; h < height + border; h++) {
-    for(uint32_t w = border; w < width + border; w++) {
+  for (uint32_t h = border; h < height + border; h++) {
+    for (uint32_t w = border; w < width + border; w++) {
       auto hood = padded_image(cv::Range(h - border, h + border + 1),
-                      cv::Range(w-border, w+border + 1));
+                               cv::Range(w - border, w + border + 1));
       cv::bitwise_and(hood,
                       element,
                       bitAnd);
       std::cout << hood << " AND " << std::endl << element << " IS " << std::endl << bitAnd << std::endl;
       double min = 0, max = 0;
       cv::minMaxLoc(bitAnd, &min, &max);
-      dst.at<uchar>(h-border, w-border) = max;
+      dst.at<uchar>(h - border, w - border) = max;
       cv::Mat temp;
       cv::resize(dst, temp, cv::Size(), 5, 5, cv::INTER_NEAREST);
       temp *= 255;
@@ -59,7 +59,7 @@ void my_dilate(cv::Mat& src, cv::Mat& dst, cv::Mat element)
   writer.release();
 }
 
-void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
+void my_erode(cv::Mat &src, cv::Mat &dst, cv::Mat element)
 {
   int ksize = element.size().height;
   int height, width;
@@ -71,7 +71,7 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
   cv::VideoWriter writer{output_file,
                          cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
                          10,
-                         cv::Size{50,50}};
+                         cv::Size{50, 50}};
 
   int border = ksize / 2;
   cv::Mat padded_image;// = cv::Mat::zeros(cv::Size(height + border * 2, width + border * 2), CV_8UC1);
@@ -82,8 +82,8 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
                  0);
   cv::Mat bitAnd;
   dst = src.clone();
-  for(uint32_t h_i = border; h_i < border + height; h_i++) {
-    for(uint32_t w_i = border; w_i < border + width; w_i++) {
+  for (uint32_t h_i = border; h_i < border + height; h_i++) {
+    for (uint32_t w_i = border; w_i < border + width; w_i++) {
       auto hood = padded_image(cv::Range(h_i - border, h_i + border + 1),
                                cv::Range(w_i - border, w_i + border + 1));
       std::cout << "Hood = " << hood << std::endl;
@@ -91,8 +91,8 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
 
       double min = 0, max = 0;
       cv::minMaxLoc(bitAnd, &min, &max, 0, 0, element);
-      std::cout <<"Min = " << min << " Max = " << max << std::endl;
-      if((int)min == 0 && (int)max == 1) {
+      std::cout << "Min = " << min << " Max = " << max << std::endl;
+      if ((int) min == 0 && (int) max == 1) {
         dst.at<uchar>(h_i - border, w_i - border) = 0;
       }
       cv::Mat temp;
@@ -105,7 +105,7 @@ void my_erode(cv::Mat& src, cv::Mat& dst, cv::Mat element)
   writer.release();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   cv::Mat demo;
 

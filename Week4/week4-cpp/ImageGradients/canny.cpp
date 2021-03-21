@@ -6,7 +6,6 @@ using namespace std;
 using namespace cv;
 
 
-
 // Variables for source and edge images
 Mat src, edges;
 
@@ -19,7 +18,7 @@ int const maxThreshold = 1000;
 
 
 // Sobel aperture sizes for Canny edge detector
-int apertureSizes [] = {3, 5, 7};
+int apertureSizes[] = {3, 5, 7};
 int maxapertureIndex = 2;
 int apertureIndex = 0;
 
@@ -28,21 +27,16 @@ int blurAmount = 0;
 int maxBlurAmount = 20;
 
 
-
-
 // Function for trackbar call
-void applyCanny(int ,void *)
+void applyCanny(int, void *)
 {
   // Variable to store blurred image
   Mat blurredSrc;
 
   // Blur the image before edge detection
-  if (blurAmount > 0 )
-  {
-    GaussianBlur(src, blurredSrc, Size( 2 * blurAmount + 1, 2 * blurAmount + 1), 0);
-  }
-  else
-  {
+  if (blurAmount > 0) {
+    GaussianBlur(src, blurredSrc, Size(2 * blurAmount + 1, 2 * blurAmount + 1), 0);
+  } else {
     blurredSrc = src.clone();
   }
 
@@ -50,40 +44,39 @@ void applyCanny(int ,void *)
   int apertureSize = apertureSizes[apertureIndex];
 
   // Apply canny to get the edges
-  Canny( blurredSrc, edges, lowThreshold, highThreshold, apertureSize );
+  Canny(blurredSrc, edges, lowThreshold, highThreshold, apertureSize);
 
   //Display images
-  imshow("Edges",edges);
+  imshow("Edges", edges);
 }
 
 
-
-
-int main(){
+int main()
+{
 
 // Read lena image
-src = imread("../data/images/sample.jpg", IMREAD_GRAYSCALE);
+  src = imread("../data/images/sample.jpg", IMREAD_GRAYSCALE);
 
 //Display images
-imshow("Edges",src);
+  imshow("Edges", src);
 
 // Create a window to display output.
-namedWindow("Edges",WINDOW_AUTOSIZE);
+  namedWindow("Edges", WINDOW_AUTOSIZE);
 
 // Trackbar to control the low threshold
-createTrackbar( "Low Threshold", "Edges", &lowThreshold, maxThreshold, applyCanny);
+  createTrackbar("Low Threshold", "Edges", &lowThreshold, maxThreshold, applyCanny);
 
 // Trackbar to control the high threshold
-createTrackbar( "High Threshold", "Edges", &highThreshold, maxThreshold, applyCanny);
+  createTrackbar("High Threshold", "Edges", &highThreshold, maxThreshold, applyCanny);
 
 // Trackbar to control the aperture size
-createTrackbar( "aperture Size", "Edges", &apertureIndex, maxapertureIndex, applyCanny);
+  createTrackbar("aperture Size", "Edges", &apertureIndex, maxapertureIndex, applyCanny);
 
 // Trackbar to control the blur
-createTrackbar( "Blur", "Edges", &blurAmount, maxBlurAmount, applyCanny);
+  createTrackbar("Blur", "Edges", &blurAmount, maxBlurAmount, applyCanny);
 
-waitKey(0);
+  waitKey(0);
 
-destroyAllWindows();
+  destroyAllWindows();
 }
 

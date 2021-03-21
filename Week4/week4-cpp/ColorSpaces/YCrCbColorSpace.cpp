@@ -6,18 +6,19 @@
 using namespace std;
 using namespace cv;
 
-int main(){
+int main()
+{
 // read the image in BGR format
-vector<Mat> channels(3);
-Mat bgr = imread(DATA_PATH+"images/capsicum.jpg");
-Mat ycbImage;
-cvtColor(bgr, ycbImage, COLOR_BGR2YCrCb);
-split(ycbImage,channels);
+  vector<Mat> channels(3);
+  Mat bgr = imread(DATA_PATH + "images/capsicum.jpg");
+  Mat ycbImage;
+  cvtColor(bgr, ycbImage, COLOR_BGR2YCrCb);
+  split(ycbImage, channels);
 
-imshow("Y Channel",channels[0]);
-imshow("Cr Channel",channels[1]);
-imshow("Cb Channel",channels[2]);
-waitKey(0);
+  imshow("Y Channel", channels[0]);
+  imshow("Cr Channel", channels[1]);
+  imshow("Cb Channel", channels[2]);
+  waitKey(0);
 
-return 0;
+  return 0;
 }

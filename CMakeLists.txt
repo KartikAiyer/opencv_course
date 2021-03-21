@@ -8,7 +8,7 @@ set(OpenCV_DIR "${OpenCV_Install}/lib/cmake/opencv4")
 find_package(OpenCV REQUIRED)
 set(images_folder ${CMAKE_CURRENT_SOURCE_DIR}/images)
 
-add_library(opencv_interface INTERFACE )
+add_library(opencv_interface INTERFACE)
 target_include_directories(opencv_interface INTERFACE ${OpenCV_INCLUDE_DIRS} "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 target_link_libraries(opencv_interface INTERFACE ${OpenCV_LIBS})
 target_compile_features(opencv_interface INTERFACE cxx_std_20)

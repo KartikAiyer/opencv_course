@@ -6,48 +6,49 @@
 using namespace std;
 using namespace cv;
 
-int main(){
+int main()
+{
 
-string filename = DATA_PATH + "images/girl.jpg";
-Mat img = imread(filename);
+  string filename = DATA_PATH + "images/girl.jpg";
+  Mat img = imread(filename);
 
 // Specify scaling factor
-float saturationScale = 0.01;
+  float saturationScale = 0.01;
 
-Mat hsvImage;
+  Mat hsvImage;
 
 // Convert to HSV color space
-cv::cvtColor(img,hsvImage,COLOR_BGR2HSV);
+  cv::cvtColor(img, hsvImage, COLOR_BGR2HSV);
 
 // Convert to float32
-hsvImage.convertTo(hsvImage,CV_32F);
+  hsvImage.convertTo(hsvImage, CV_32F);
 
-vector<Mat> channels(3);
+  vector<Mat> channels(3);
 
 // Split the channels
-split(hsvImage,channels);
+  split(hsvImage, channels);
 
 // Multiply S channel by scaling factor
-channels[1] = channels[1] * saturationScale;
+  channels[1] = channels[1] * saturationScale;
 
 // Clipping operation performed to limit pixel values
 // between 0 and 255
-min(channels[1],255,channels[1]);
-max(channels[1],0,channels[1]);
+  min(channels[1], 255, channels[1]);
+  max(channels[1], 0, channels[1]);
 
 // Merge the channels
-merge(channels,hsvImage);
+  merge(channels, hsvImage);
 
 // Convert back from float32
-hsvImage.convertTo(hsvImage,CV_8UC3);
+  hsvImage.convertTo(hsvImage, CV_8UC3);
 
-Mat imSat;
+  Mat imSat;
 // Convert to BGR color space
-cv::cvtColor(hsvImage,imSat,COLOR_HSV2BGR);
+  cv::cvtColor(hsvImage, imSat, COLOR_HSV2BGR);
 
-imshow("Original Image", img);
-imshow("Desaturated Image", imSat);
-waitKey(0);
+  imshow("Original Image", img);
+  imshow("Desaturated Image", imSat);
+  waitKey(0);
 
-return 0;
+  return 0;
 }

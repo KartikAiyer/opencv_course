@@ -17,20 +17,18 @@ Mat source;
 void drawCircle(int action, int x, int y, int flags, void *userdata)
 {
   // Action to be taken when left mouse button is pressed
-  if( action == EVENT_LBUTTONDOWN )
-  {
-    center = Point(x,y);
+  if (action == EVENT_LBUTTONDOWN) {
+    center = Point(x, y);
     // Mark the center
-    circle(source, center, 1, Scalar(255,255,0), 2, LINE_AA );
+    circle(source, center, 1, Scalar(255, 255, 0), 2, LINE_AA);
   }
-  // Action to be taken when left mouse button is released
-  else if( action == EVENT_LBUTTONUP)
-  {
-    circumference = Point(x,y);
+    // Action to be taken when left mouse button is released
+  else if (action == EVENT_LBUTTONUP) {
+    circumference = Point(x, y);
     // Calculate radius of the circle
-    float radius = sqrt(pow(center.x-circumference.x,2)+pow(center.y-circumference.y,2));
+    float radius = sqrt(pow(center.x - circumference.x, 2) + pow(center.y - circumference.y, 2));
     // Draw the circle
-    circle(source, center, radius, Scalar(0,255,0), 2, LINE_AA );
+    circle(source, center, radius, Scalar(0, 255, 0), 2, LINE_AA);
     imshow("Window", source);
   }
 
@@ -38,22 +36,22 @@ void drawCircle(int action, int x, int y, int flags, void *userdata)
 
 int main()
 {
-  source = imread("sample.jpg",1);
+  source = imread("sample.jpg", 1);
   // Make a dummy image, will be useful to clear the drawing
   Mat dummy = source.clone();
   namedWindow("Window");
   // highgui function called when mouse events occur
   setMouseCallback("Window", drawCircle);
-  int k=0;
+  int k = 0;
   // loop until escape character is pressed
-  while(k!=27)
-  {
-    imshow("Window", source );
-    putText(source,"Choose center, and drag, Press ESC to exit and c to clear" ,Point(10,30), FONT_HERSHEY_SIMPLEX, 0.7,Scalar(255,255,255), 2 );
-    k= waitKey(20) & 0xFF;
-    if(k== 99)
-            // Another way of cloning
-            dummy.copyTo(source);
+  while (k != 27) {
+    imshow("Window", source);
+    putText(source, "Choose center, and drag, Press ESC to exit and c to clear", Point(10, 30), FONT_HERSHEY_SIMPLEX,
+            0.7, Scalar(255, 255, 255), 2);
+    k = waitKey(20) & 0xFF;
+    if (k == 99)
+      // Another way of cloning
+      dummy.copyTo(source);
   }
   return 0;
 }

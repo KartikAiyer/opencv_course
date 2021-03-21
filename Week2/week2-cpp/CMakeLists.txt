@@ -10,7 +10,6 @@ SET(CMAKE_CXX_STANDARD 11)
 SET(OpenCV_DIR /home/kartik/opencv)
 
 
-
 ################### OpenCV_DIR Examples  #####################
 
 ### MACOS : /usr/local/Cellar/opencv/3.3.1_1/share/OpenCV/
@@ -22,22 +21,20 @@ SET(OpenCV_DIR /home/kartik/opencv)
 ##############################################################
 
 
-
-
 ###################   ***DO NOT EDIT***  #####################
 
 #############  Common Instructions for all Users  ############
-if(MSVC)
-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-endif()
+if (MSVC)
+    SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+endif ()
 
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
 
-include_directories( ${OpenCV_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 MACRO(add_example name)
-  ADD_EXECUTABLE(${name} ${name}.cpp)
-  TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS} )
+    ADD_EXECUTABLE(${name} ${name}.cpp)
+    TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS})
 ENDMACRO()
 
 add_example(adding_a_trackbar_as_controller)

@@ -72,7 +72,7 @@ int main(void)
     cv::multiply(glassBGR, glassMask, maskedGlass);
     cv::imshow("glassMask", maskedGlass);
     cv::waitKey();
-    std::cout << maskedGlass<< std::endl;
+    std::cout << maskedGlass << std::endl;
 
     cv::Mat blendedMask;
     cv::add(maskedGlass, maskedEye, blendedMask);

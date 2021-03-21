@@ -3,11 +3,11 @@ project(trackbar CXX)
 
 # !!! Set OpenCV_DIR to your local Opencv installation
 SET(OpenCV_DIR /home/kartik/opencv)
-if(MSVC)
-  SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-endif()
+if (MSVC)
+    SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+endif ()
 
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
 set(images_folder ${CMAKE_CURRENT_SOURCE_DIR}/Data)
 file(GLOB sources *.cpp *.h)
 add_executable(trackbar ${sources})

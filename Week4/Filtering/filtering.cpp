@@ -5,7 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include <utility>
 
-cv::Mat gaussian_denoise(cv::Mat& image, cv::Size kernel_size)
+cv::Mat gaussian_denoise(cv::Mat &image, cv::Size kernel_size)
 {
   cv::Mat output;
   cv::GaussianBlur(image, output, std::move(kernel_size), 1, 1);

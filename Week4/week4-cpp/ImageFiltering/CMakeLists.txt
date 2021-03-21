@@ -21,22 +21,20 @@ SET(CMAKE_CXX_STANDARD 11)
 ##############################################################
 
 
-
-
 ###################   ***DO NOT EDIT***  #####################
 
 #############  Common Instructions for all Users  ############
-if(MSVC)
-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-endif()
+if (MSVC)
+    SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+endif ()
 
-find_package( OpenCV REQUIRED )
+find_package(OpenCV REQUIRED)
 
-include_directories( ${OpenCV_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 MACRO(add_example name)
-  ADD_EXECUTABLE(${name} ${name}.cpp)
-  TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS} week4_interface)
+    ADD_EXECUTABLE(${name} ${name}.cpp)
+    TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS} week4_interface)
 ENDMACRO()
 
 add_example(convolution)
