@@ -34,7 +34,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 MACRO(add_example name)
     ADD_EXECUTABLE(${name} ${name}.cpp)
-    TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS} week4_interface)
+    TARGET_LINK_LIBRARIES(${name} opencv_interface week4_interface)
 ENDMACRO()
 
 add_example(sobelFilter)
