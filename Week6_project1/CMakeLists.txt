@@ -9,3 +9,4 @@ target_compile_definitions(project1_interface INTERFACE -DDATA_PATH="${data_path
 add_subdirectory(instagram_filters)
 add_subdirectory(blemish_removal)
 add_subdirectory(camera_filter)
+add_subdirectory(chroma_key)
