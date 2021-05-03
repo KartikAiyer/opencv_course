@@ -49,4 +49,18 @@ namespace my_cv_utils
 
     return r;
   }
+
+  cv::Mat fit_large_to_display(cv::Mat& input, cv::Size fit_to = cv::Size{1280, 720})
+  {
+    cv::Mat output;
+    if(input.size().width > fit_to.width || input.size().height > fit_to.height)
+    {
+      double dx = (double)fit_to.width / input.size().width;
+      double dy =  (double)fit_to.height / input.size().height;
+      cv::resize(input,output, cv::Size{0,0}, dx, dy, cv::INTER_AREA);
+    } else {
+      output = input;
+    }
+    return output;
+  }
 };
