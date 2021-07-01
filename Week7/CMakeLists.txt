@@ -8,3 +8,4 @@ target_compile_definitions(week7_interface INTERFACE -DDATA_FOLDER="${data_path}
 
 add_subdirectory(week7-cpp)
 add_subdirectory(Panorama)
+add_subdirectory(ImageAlignment)
