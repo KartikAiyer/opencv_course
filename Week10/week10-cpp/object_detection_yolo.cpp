@@ -43,14 +43,14 @@ int main(int argc, char** argv)
         return 0;
     }
     // Load names of classes
-    string classesFile = "../data/models/coco.names";
+    string classesFile = DATA_FOLDER "/models/coco.names";
     ifstream ifs(classesFile.c_str());
     string line;
     while (getline(ifs, line)) classes.push_back(line);
 
     // Give the configuration and weight files for the model
-    String modelConfiguration = "../data/models/yolov3.cfg";
-    String modelWeights = "../data/models/yolov3.weights";
+    String modelConfiguration = DATA_FOLDER "/models/yolov3.cfg";
+    String modelWeights = DATA_FOLDER "/models/yolov3.weights";
 
     // Load the network
     Net net = readNetFromDarknet(modelConfiguration, modelWeights);
@@ -67,9 +67,12 @@ int main(int argc, char** argv)
         if (parser.has("image"))
         {
             // Open the image file
+            std::cout << "Will Look for image" << std::endl;
             str = parser.get<String>("image");
+            std::cout << str << std::endl;
             ifstream ifile(str);
             if (!ifile) throw("error");
+            std::cout << "No Error Yet" << std::endl;
             cap.open(str);
             str.replace(str.end()-4, str.end(), "_yolo_out_cpp.jpg");
             outputFile = str;

@@ -7,3 +7,4 @@ add_library(week10_interface INTERFACE)
 target_compile_definitions(week10_interface INTERFACE -DDATA_FOLDER="${data_path}")
 
 add_subdirectory(week10-cpp)
+
