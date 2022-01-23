@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.11)
 project(opencv_course CXX)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(Conan)
 
 set(OpenCV_DIR "${OpenCV_Install}/lib/cmake/opencv4")
 find_package(OpenCV REQUIRED)
@@ -24,3 +25,4 @@ add_subdirectory(Week7)
 add_subdirectory(Week8)
 add_subdirectory(Week9)
 add_subdirectory(Week10)
+add_subdirectory(Week11)
