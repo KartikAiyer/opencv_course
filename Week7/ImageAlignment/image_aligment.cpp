@@ -2,13 +2,13 @@
 
 std::vector<cv::Mat> read_emir(cv::Mat img)
 {
-  Size sz = img.size();
+  cv::Size sz = img.size();
   int height = sz.height / 3;
   int width = sz.width;
   std::vector<cv::Mat>channels;
-  channels.push_back(img( Rect(0, 0,         width, height)));
-  channels.push_back(img( Rect(0, height,    width, height)));
-  channels.push_back(img( Rect(0, 2*height,  width, height)));
+  channels.push_back(img( cv::Rect(0, 0,         width, height)));
+  channels.push_back(img( cv::Rect(0, height,    width, height)));
+  channels.push_back(img( cv::Rect(0, 2*height,  width, height)));
   return channels;
 }
 
