@@ -15,6 +15,12 @@ target_link_libraries(opencv_interface INTERFACE ${OpenCV_LIBS})
 target_compile_features(opencv_interface INTERFACE cxx_std_20)
 target_compile_definitions(opencv_interface INTERFACE -DIMAGES_FOLDER="${images_folder}")
 
+set(CONAN_EXTRA_REQUIRES
+        "docopt.cpp/0.6.3"
+        "spdlog/1.10.0")
+run_conan()
+find_package(docopt REQUIRED)
+find_package(spdlog REQUIRED)
 add_subdirectory(Week1)
 
 add_subdirectory(Week3)
@@ -26,3 +32,4 @@ add_subdirectory(Week8)
 add_subdirectory(Week9)
 add_subdirectory(Week10)
 add_subdirectory(Week11)
+add_subdirectory(Week12)
