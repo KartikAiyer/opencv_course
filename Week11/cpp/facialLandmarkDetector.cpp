@@ -50,7 +50,7 @@ int main(int argc, char** argv)
   deserialize(MODEL_PATH "/shape_predictor_68_face_landmarks.dat") >> landmarkDetector;
 
   // Read Image
-  string imageFilename(DATA_PATH "/family.jpg");
+  string imageFilename(DATA_PATH "/face1.png");
   cv::Mat im = cv::imread(imageFilename);
 
   // landmarks will be stored in results/famil_0.txt

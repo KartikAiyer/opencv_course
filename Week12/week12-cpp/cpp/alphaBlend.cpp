@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 {
 
     // Read in the png foreground asset file that contains both rgb and alpha information
-    Mat foreGroundImage = imread("../data/images/foreGroundAssetLarge.png", -1);
+    Mat foreGroundImage = imread(DATA_FOLDER "/images/foreGroundAssetLarge.png", -1);
     Mat bgra[4];
     split(foreGroundImage, bgra);//split png foreground
 
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
     imshow("alpha",  bgra[3] > 0 );
 
     // Read background image
-    Mat background = imread("../data/images/backGroundLarge.jpg");
+    Mat background = imread(DATA_FOLDER "/images/backGroundLarge.jpg");
 
     // Convert Mat to float data type
     foreground.convertTo(foreground, CV_32FC3);

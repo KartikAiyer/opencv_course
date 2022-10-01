@@ -31,7 +31,7 @@ include(../dlib/dlib/cmake)
 MACRO(add_example name)
   ADD_EXECUTABLE(${name} ${name}.cpp)
 #  TARGET_LINK_LIBRARIES(${name} ${OpenCV_LIBS} dlib::dlib)
-   TARGET_LINK_LIBRARIES(${name} opencv_interface dlib::dlib)
+   TARGET_LINK_LIBRARIES(${name} opencv_interface week12_interface dlib::dlib)
 ENDMACRO()
 
 

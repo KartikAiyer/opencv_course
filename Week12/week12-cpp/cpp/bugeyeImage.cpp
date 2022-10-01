@@ -67,9 +67,9 @@ int main(int argc, char** argv)
   frontal_face_detector detector = get_frontal_face_detector();
   shape_predictor pose_model;
 
-  string modelPath = "../data/models/shape_predictor_68_face_landmarks.dat";
+  string modelPath = DATA_FOLDER "/models/shape_predictor_68_face_landmarks.dat";
 
-  string filename = "../data/images/sample.jpg";
+  string filename = DATA_FOLDER "/images/sample.jpg";
 
   float bulge_amount = .5;
 
