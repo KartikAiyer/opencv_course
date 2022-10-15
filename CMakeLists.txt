@@ -21,6 +21,19 @@ set(CONAN_EXTRA_REQUIRES
 run_conan()
 find_package(docopt REQUIRED)
 find_package(spdlog REQUIRED)
+
+include(FetchContent)
+
+FetchContent_Declare(dlib
+        GIT_REPOSITORY https://github.com/davisking/dlib.git
+        GIT_TAG v19.24)
+
+FetchContent_GetProperties(dlib)
+if(NOT dlib_POPULATED)
+    FetchContent_Populate(dlib)
+    add_subdirectory(${dlib_SOURCE_DIR} ${dlib_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 add_subdirectory(Week1)
 
 add_subdirectory(Week3)
@@ -33,3 +46,4 @@ add_subdirectory(Week9)
 add_subdirectory(Week10)
 add_subdirectory(Week11)
 add_subdirectory(Week12)
+add_subdirectory(Week13)
